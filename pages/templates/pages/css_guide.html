@@ -184,7 +184,10 @@ function notify(e) {
 }
 
 function hideNotification(e) {
-    e.target.style.display = 'none';
+    e.target.classList.add('hidden');
+    setTimeout(function(){
+        e.target.style.display = 'none';
+    }, 200);
 }
 &lt;/script&gt;
 </code></pre>
