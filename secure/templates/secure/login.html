@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form method="POST" action="" class="form">{% csrf_token %}
+        {% if error %}
+        <div class="alert-error">{{error}}</div>
+        {% endif %}
+
+        <div class="form-field">
+            <label> Нэвтрэх нэр: </label>
+            <div>
+                <input type="text" name="username" value="{{ username }}"/>
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label>  Нууц үг: </label>
+            <div>
+                <input type="password" name="password"/>
+            </div>
+        </div>
+
+        <div class="form-field">
+            <input type="submit" value="Нэвтрэх" class="btn"/>
+        </div>
+</form>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+var el_username = document.querySelector('input[name="username"]');
+document.querySelector('input[name="' + (el_username.value ? 'password' : 'username') + '"]').focus();
+</script>
+{% endblock %}

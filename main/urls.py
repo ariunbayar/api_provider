@@ -16,5 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+import pages.views
+import secure.views
+
+
 urlpatterns = [
+
+    path('login/', secure.views.login, name='login'),
+    path('logout/', secure.views.logout, name='logout'),
+
+    path('p/css-guide/', pages.views.css_guide, name='css-guide')
+
 ]

@@ -8,6 +8,8 @@ from .local_settings import (
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+INTERNAL_IPS = ['127.0.0.1']
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -15,6 +17,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Application definition
 
 INSTALLED_APPS = [
+    'pages.apps.PagesConfig',
+    'secure.apps.SecureConfig',
     'user.apps.UserConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -22,6 +26,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+if DEBUG == True:
+    INSTALLED_APPS += ['livereload']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -108,3 +115,7 @@ STATICFILES_DIRS =[
 
 
 AUTH_USER_MODEL = 'user.User'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'css-guide'
+LOGOUT_REDIRECT_URL = 'login'

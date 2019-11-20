@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>API provider</title>
+
+<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+{% if debug %}
+<script src="//localhost:35729/livereload.js?port=35729"></script>
+{% endif %}
+</head>
+<body>
+
+    <div class="header-wrapper">
+        <div class="header">
+            <ul class="menu">
+                <li><a href="#" class="logo">API &nbsp; Lounge</a></li>
+                <li><a href="#" {% if request.resolver_match.url_name == "login" %}class="active"{% endif %}>Menu item</a></li>
+                <li><a href="{% url "css-guide" %}">CSS Guide</a></li>
+
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url "logout" %}">Гарах</a></li>
+                {% else %}
+                <li><a href="{% url "login" %}">Нэвтрэх</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <div class="footer-wrapper">
+        <div class="footer">
+            2019 он ❤️ api.20k at gmail.com
+        </div>
+    </div>
+
+    {% block javascript %}{% endblock %}
+
+</body>
+<html>

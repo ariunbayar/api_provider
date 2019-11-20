@@ -1,1 +1,2 @@
 Django==2.2.7
+livereload==2.6.1
