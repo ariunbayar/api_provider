@@ -1,0 +1,15 @@
+<ul class="menu">
+
+    <li><a href="#" class="logo">API &amp; Lounge</a></li>
+
+    <li><a href="{% url "schema-add" %}" {% if request.resolver_match.url_name == "schema-add" %}class="active"{% endif %}>Schema</a></li>
+
+    <li><a href="{% url "css-guide" %}" {% if request.resolver_match.url_name == "css-guide" %}class="active"{% endif %}>CSS Guide</a></li>
+
+    {% if request.user.is_authenticated %}
+    <li><a href="{% url "logout" %}" {% if request.resolver_match.url_name == "logout" %}class="active"{% endif %}>Гарах</a></li>
+    {% else %}
+    <li><a href="{% url "login" %}" {% if request.resolver_match.url_name == "login" %}class="active"{% endif %}>Нэвтрэх</a></li>
+    {% endif %}
+
+</ul>

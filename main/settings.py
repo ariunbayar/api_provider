@@ -18,6 +18,7 @@ INTERNAL_IPS = ['127.0.0.1']
 
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
+    'schema.apps.SchemaConfig',
     'secure.apps.SecureConfig',
     'user.apps.UserConfig',
     'django.contrib.auth',

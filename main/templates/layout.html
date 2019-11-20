@@ -14,18 +14,7 @@
 
     <div class="header-wrapper">
         <div class="header">
-            <ul class="menu">
-                <li><a href="#" class="logo">API &amp; Lounge</a></li>
-                <li><a href="#" {% if request.resolver_match.url_name == "login" %}class="active"{% endif %}>Menu item</a></li>
-                <li><a href="{% url "css-guide" %}">CSS Guide</a></li>
-
-                {% if request.user.is_authenticated %}
-                <li><a href="{% url "logout" %}">Гарах</a></li>
-                {% else %}
-                <li><a href="{% url "login" %}">Нэвтрэх</a></li>
-                {% endif %}
-
-            </ul>
+            {% include "menu.html" %}
         </div>
     </div>
 
