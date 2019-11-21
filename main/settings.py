@@ -18,6 +18,7 @@ INTERNAL_IPS = ['127.0.0.1']
 
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
+    'request.apps.RequestConfig',
     'schema.apps.SchemaConfig',
     'secure.apps.SecureConfig',
     'user.apps.UserConfig',
@@ -32,6 +33,7 @@ if DEBUG == True:
     INSTALLED_APPS += ['livereload']
 
 MIDDLEWARE = [
+    'main.middleware.RequestLogMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
