@@ -17,12 +17,13 @@ INTERNAL_IPS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'value.apps.ValueConfig',
+    'record.apps.RecordConfig',
     'notification.apps.NotificationConfig',
     'table.apps.TableConfig',
     'column.apps.ColumnConfig',
     'pages.apps.PagesConfig',
     'request.apps.RequestConfig',
-    'schema.apps.SchemaConfig',
     'secure.apps.SecureConfig',
     'user.apps.UserConfig',
     'django.contrib.auth',
