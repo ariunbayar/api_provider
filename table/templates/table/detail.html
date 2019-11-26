@@ -4,6 +4,12 @@
 
 <p><strong>{{ table.name }}</strong> хүснэгтэнд харгалзах баганууд</p>
 
+
+<p>
+    <a href="{% url "table-edit" table.pk %}" class="btn">Засах</a>
+    <a href="{% url "table-delete" table.pk %}" class="btn red">Хүснэгтийг устгах</a>
+</p>
+
 {% if columns %}
 <table>
     <thead>
@@ -25,9 +31,8 @@
 </table>
 {% endif %}
 
+<a href="{% url "table-list" %}" class="btn">&laquo; Хүснэгтүүд</a>
 <a href="{% url "column-new" table.pk %}" class="btn">Багана нэмэх</a>
-<a href="{% url "table-edit" table.pk %}" class="btn">Засах</a>
-<a href="{% url "table-delete" table.pk %}" class="btn red">Хүснэгтийг устгах</a>
 
 
 {% endblock %}
