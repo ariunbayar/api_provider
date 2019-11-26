@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Table
 from .forms import TableForm
 from column.models import Column
-from notification.models import Notification
+from notification.utils import notify
 
 
 @login_required
@@ -31,16 +31,17 @@ def detail(request, pk):
 def new(request):
 
     if request.method == 'POST':
+
         form = TableForm(request.POST)
+
         if form.is_valid():
+
             table = Table.obs.create(
                     user=request.user,
                     name=form.cleaned_data.get('name'),
                 )
-            Notification.objects.create(
-                    user=request.user,
-                    message='"%s" нэртэй хүснэгтийг амжилттай үүсгэлээ' % table.name,
-                )
+            notify(request.user, '"%s" нэртэй хүснэгтийг амжилттай үүсгэлээ' % table.name)
+
             return redirect('table-detail', table.pk)
     else:
         form = TableForm()
@@ -53,14 +54,20 @@ def new(request):
 
 @login_required
 def edit(request, pk):
+
     table = get_object_or_404(Table.obs, pk=pk, user=request.user)
 
     if request.method == 'POST':
+
         form = TableForm(request.POST, instance=table)
+
         if form.is_valid():
+
             table.name = form.cleaned_data.get('name')
             table.save()
-            # TODO notify
+
+            notify(request.user, '"%s" нэртэй хүснэгтийг амжилттай хадгаллаа' % table.name)
+
             return redirect('table-detail', table.pk)
     else:
         form = TableForm(instance=table)
@@ -79,5 +86,7 @@ def delete(request, pk):
 
     table.is_deleted = True
     table.save()
-    # TODO make create notification
+
+    notify(request.user, '"%s" нэртэй хүснэгтийг амжилттай устгалаа' % table.name)
+
     return redirect('table-list')

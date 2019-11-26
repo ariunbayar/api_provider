@@ -4,7 +4,7 @@
 
 <p><strong>{{ table.name }}</strong> хүснэгтийн багана</p>
 
-<form method="POST" action="" class="form">{% csrf_token %}
+<form method="POST" action="" class="form" novalidate>{% csrf_token %}
     {{ form.table }}
     <div class="form-field">
         <label> {{ form.name.label }} </label>
