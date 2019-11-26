@@ -5,7 +5,7 @@ from django.conf import settings
 class Request(models.Model):
 
     class Meta:
-        ordering = ('started_at',)
+        ordering = ('-started_at',)
 
     METHOD_CHOICES = [('POST', 'Post'), ('GET', 'Get')]
 
@@ -23,5 +23,3 @@ class Request(models.Model):
     request_size = models.IntegerField()
     response_size = models.IntegerField(null=True)
     status_code = models.IntegerField(null=True)
-
-

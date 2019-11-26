@@ -11,6 +11,9 @@ body, input, textarea{
 }
 
 
+/*
+ * Layout
+ */
 .header-wrapper .header,
 .content-wrapper .content,
 .footer-wrapper .footer {
@@ -32,6 +35,9 @@ body, input, textarea{
     font-size: 1rem;
 }
 
+/*
+ * Text styling
+ */
 h2, h3 {
     font-family: times;
     font-weight: normal;
@@ -64,6 +70,14 @@ p {
     margin: 1.6rem 0;
 }
 
+.word-break{
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+}
+.nowrap {
+    white-space: nowrap;
+}
 
 ::-moz-selection {
     color: #262727;

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>Сайтад ирсэн хандалтууд</h1>
+
+{% if requests %}
+<table>
+    <thead>
+    <tr>
+        <th>IP хаяг</th>
+        <th>Хуудас</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for request in requests %}
+    <tr>
+        {% comment %}<a href="{% url "request-detail" request.id %}">{{ request.started_at }}</a>{% endcomment %}
+        <td> {{ request.ip_addr }} </td>
+        <td class="word-break"> {{ request.url }} </td>
+        <td class="nowrap">
+            {{ request.status_code }}
+            {% if request.status_code == 200 %}- OK{% endif %}
+        </td>
+        <td class="nowrap">
+            <div> {{ request.started_at }} </div>
+
+            {% if request.is_ajax %}
+            <div>ajax</div>
+            {% endif %}
+
+            <div>
+                {% if request.duration_ms %} {{ request.duration_ms }}ms {% else %} - {% endif %}
+            </div>
+
+            <div>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+
+{% endblock %}
