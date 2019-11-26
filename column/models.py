@@ -11,6 +11,7 @@ class Column(models.Model):
     DATATYPES = [
             ('bool', 'Boolean'),
             ('int', 'Integer'),
+            ('char_250', 'Char(250)'),
             ('text', 'Text'),
             ('datetime', 'Datetime'),
         ]
