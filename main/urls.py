@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+import column.views
+import notification.views
 import pages.views
-import schema.views
 import secure.views
+import table.views
 
 
 urlpatterns = [
@@ -28,6 +30,16 @@ urlpatterns = [
 
     path('p/css-guide/', pages.views.css_guide, name='css-guide'),
 
-    path('schema/add/', schema.views.add, name='schema-add')
+    path('table/', table.views.list, name='table-list'),
+    path('table/new/', table.views.new, name='table-new'),
+    path('table/<int:pk>/', table.views.detail, name='table-detail'),
+    path('table/<int:pk>/edit/', table.views.edit, name='table-edit'),
+    path('table/<int:pk>/delete/', table.views.delete, name='table-delete'),
+
+    path('table/<int:table_pk>/new/', column.views.new, name='column-new'),
+    path('table/<int:table_pk>/<int:pk>/edit/', column.views.edit, name='column-edit'),
+    path('table/<int:table_pk>/<int:pk>/delete/', column.views.delete, name='column-delete'),
+
+    path('notification/mark-as-read/', notification.views.mark_as_read, name='notification-mark-as-read'),
 
 ]

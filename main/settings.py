@@ -17,6 +17,9 @@ INTERNAL_IPS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'notification.apps.NotificationConfig',
+    'table.apps.TableConfig',
+    'column.apps.ColumnConfig',
     'pages.apps.PagesConfig',
     'request.apps.RequestConfig',
     'schema.apps.SchemaConfig',
@@ -52,6 +55,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'context_processors.context_processor',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -106,6 +110,8 @@ USE_I18N = True
 USE_L10N = False
 
 USE_TZ = True
+
+DATETIME_FORMAT = 'Y-m-d H:i'
 
 
 # Static files (CSS, JavaScript, Images)

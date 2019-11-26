@@ -3,7 +3,7 @@
 
 <form method="POST" action="" class="form">{% csrf_token %}
         {% if error %}
-        <div class="alert-error">{{error}}</div>
+        <div class="form-error">{{error}}</div>
         {% endif %}
 
         <div class="form-field">

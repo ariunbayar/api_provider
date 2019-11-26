@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<form method="POST" action="" class="form" novalidate>{% csrf_token %}
+    <div class="form-field">
+        <label> {{ form.name.label }} </label>
+        <div>
+            {{ form.name }}
+            {% if form.name.errors %}
+            <span class="field-error">{{ form.name.errors.0 }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-field">
+        <input type="submit" value="Хадгалах" class="btn"/>
+    </div>
+</form>
+
+{% endblock %}

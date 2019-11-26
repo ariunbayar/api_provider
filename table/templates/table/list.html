@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<p>Эдгээр хүснэгтийн дагуу мэдээллүүдийг оруулна</p>
+
+{% if tables %}
+<table>
+    <thead>
+        <tr>
+            <th>Нэр</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for table in tables %}
+        <tr>
+            <td>
+                <a href="{% url "table-detail" table.pk %}">{{ table.name }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+<a href="{% url "table-new" %}" class="btn">Шинэ хүснэгт</a>
+
+
+{% endblock %}

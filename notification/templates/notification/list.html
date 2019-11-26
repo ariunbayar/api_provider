@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+{% if notification_page.paginator.num_pages %}
+
+    <table class="list">
+    <thead>
+        <tr>
+            <th>Огноо</th>
+            <th>Анхааруулга</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for notif in notification_page %}
+        <tr>
+            <td class="nowrap">{{ notif.created_at }}</td>
+            <td>
+                {% if not notif.is_read %} <strong> {% endif %}
+                {{ notif.message | linebreaksbr }}
+                {% if not notif.is_read %} </strong> {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+    {% if notification_page.paginator.num_pages > 1 %}
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    {% if notification_page.has_previous %}
+                        <a href="{% url "notification-list" %}?page={{ notification_page.previous_page_number }}">&laquo; Өмнөх</a>
+                    {% else %}
+                        &laquo; Өмнөх
+                    {% endif %}
+                </td>
+                <td>
+                    {{ notification_page.number }}-р хуудас. Нийт {{ notification_page.paginator.num_pages }} хуудас
+                </td>
+                <td>
+                    {% if notification_page.has_next %}
+                        <a href="{% url "notification-list" %}?page={{ notification_page.next_page_number }}">Дараах &raquo;</a>
+                    {% else %}
+                        Дараах &raquo;
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+
+    <a href="{% url "notification-mark-as-read" %}" class="btn">Уншсанаар тэмдэглэх</a>
+
+{% else %}
+    0 анхааруулга бүртгэгдсэн байна.
+{% endif %}
+
+{% endblock %}

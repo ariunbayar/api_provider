@@ -132,6 +132,7 @@ table {
     width: 100%;
     max-width: 100%;
     border-collapse: collapse;
+    margin: 1.6rem 0;
 }
 table thead th {
     vertical-align: bottom;
@@ -331,8 +332,21 @@ textarea{
     border-radius: 4px;
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.15) inset, 0px 1px 1px 0px rgba(255,255,255,.85);
 }
+select{
+    background-color: rgba(255, 255, 255, .85);
+    font-family: sans-serif;
+    font-weight: 300;
+    font-size: inherit;
+    padding: .5rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    margin-top: .5rem;
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.15) inset, 0px 1px 1px 0px rgba(255,255,255,.85);
+    color: inherit;
+}
 
-.form-error{
+.form > .form-error {
     color: #c80044;
     background-color: #cfd8dc;
     padding: .5em 1.5em;
@@ -342,7 +356,7 @@ textarea{
     font-size: .84rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15) inset, 0 1px 0 0 rgba(255,255,255,.35);
 }
-.field-error{
+.form > .form-field .field-error{
     display: block;
     color: #c80044;
     font-size: .84rem;

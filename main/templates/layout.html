@@ -30,7 +30,18 @@
         </div>
     </div>
 
+    <div class="notifications">
+        {% for notification in notifications %}
+        <div class="notification" data-id="{{ notification.pk }}">
+            {{ notification.message }}<br/>
+            {{ notification.created_at }}
+        </div>
+        {% endfor %}
+    </div>
+
     {% block javascript %}{% endblock %}
+    <script src="{% static "js/utils.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
 
 </body>
 <html>

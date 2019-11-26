@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<p><strong>{{ table.name }}</strong> хүснэгтэнд харгалзах баганууд</p>
+
+{% if columns %}
+<table>
+    <thead>
+        <tr>
+            <th>Нэр</th>
+            <th>Төрөл</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for column in columns %}
+        <tr>
+            <td> <a href="{% url "column-edit" table.pk column.pk %}">{{ column.name }}</a> </td>
+            <td> {{ column.get_datatype_display }} </td>
+            <td> <a href="{% url "column-delete" table.pk column.pk %}">устгах</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+<a href="{% url "column-new" table.pk %}" class="btn">Багана нэмэх</a>
+<a href="{% url "table-edit" table.pk %}" class="btn">Засах</a>
+<a href="{% url "table-delete" table.pk %}" class="btn red">Хүснэгтийг устгах</a>
+
+
+{% endblock %}

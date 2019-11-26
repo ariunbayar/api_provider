@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<p><strong>{{ table.name }}</strong> хүснэгтийн багана</p>
+
+<form method="POST" action="" class="form">{% csrf_token %}
+    {{ form.table }}
+    <div class="form-field">
+        <label> {{ form.name.label }} </label>
+        <div>
+            {{ form.name }}
+            {% if form.name.errors %}
+            <span class="field-error">{{ form.name.errors.0 }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-field">
+        <label> {{ form.datatype.label }} </label>
+        <div>
+            {{ form.datatype }}
+            {% if form.datatype.errors %}
+            <span class="field-error">{{ form.datatype.errors.0 }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-field">
+        <input type="submit" value="Хадгалах" class="btn"/>
+    </div>
+</form>
+
+{% endblock %}
