@@ -19,6 +19,7 @@ from django.urls import path
 import column.views
 import notification.views
 import pages.views
+import record.views
 import request.views
 import secure.views
 import table.views
@@ -44,5 +45,8 @@ urlpatterns = [
     path('notification/mark-as-read/', notification.views.mark_as_read, name='notification-mark-as-read'),
 
     path('request/', request.views.list, name='request-list'),
+
+    path('api/<str:table_name>/new/', record.views.insert, name='api-record-insert'),
+    path('api/<str:table_name>/', record.views.fetch, name='api-record-fetch'),
 
 ]

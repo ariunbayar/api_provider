@@ -18,6 +18,7 @@ INTERNAL_IPS = ['127.0.0.1']
 
 INSTALLED_APPS = [
     'column.apps.ColumnConfig',
+    'error.apps.ErrorConfig',
     'notification.apps.NotificationConfig',
     'pages.apps.PagesConfig',
     'record.apps.RecordConfig',
@@ -113,6 +114,7 @@ USE_L10N = False
 USE_TZ = True
 
 DATETIME_FORMAT = 'Y-m-d H:i'
+DATETIME_API_FORMAT = "%Y-%m-%dT%H:%M:%S.%f%z"
 
 
 # Static files (CSS, JavaScript, Images)
