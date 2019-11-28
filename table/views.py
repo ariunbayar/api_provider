@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
+from column.models import Column
+from main.decorators import track_exceptions
+from notification.utils import notify
+
 from .models import Table
 from .forms import TableForm
-from column.models import Column
-from notification.utils import notify
 
 
 @login_required
@@ -28,6 +30,7 @@ def detail(request, pk):
 
 
 @login_required
+@track_exceptions
 def new(request):
 
     if request.method == 'POST':
@@ -53,6 +56,7 @@ def new(request):
 
 
 @login_required
+@track_exceptions
 def edit(request, pk):
 
     table = get_object_or_404(Table.obs, pk=pk, user=request.user)
@@ -79,6 +83,7 @@ def edit(request, pk):
 
 
 @login_required
+@track_exceptions
 def delete(request, pk):
     table = get_object_or_404(Table.obs, pk=pk, user=request.user)
 

@@ -17,6 +17,7 @@ INTERNAL_IPS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'slug.apps.SlugConfig',
     'column.apps.ColumnConfig',
     'error.apps.ErrorConfig',
     'notification.apps.NotificationConfig',

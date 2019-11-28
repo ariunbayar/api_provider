@@ -50,3 +50,6 @@ urlpatterns = [
     path('api/<str:table_name>/', record.views.fetch, name='api-record-fetch'),
 
 ]
+
+handler404 = 'pages.views.handler404'
+handler500 = 'pages.views.handler500'
