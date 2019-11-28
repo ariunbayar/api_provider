@@ -14,6 +14,7 @@ from .models import (
         Char250ValueError,
         DateTimeValueError,
         RecordSaveError,
+        DatatypeUndefinedError,
     )
 from error.utils import track_error
 
@@ -82,7 +83,10 @@ def insert(request, table_name):
 @require_GET
 def fetch(request, table_name):
 
-    table = get_object_or_404(Table.obs, name=table_name)
+    def track_error_and_rsp(error_code, message):
+        track_error(request.tracking_number, error_code)
+        return JsonResponse({'success': False, 'error': message})
+
 
     factory = RecordModelFactory(table_name)
 
@@ -94,10 +98,13 @@ def fetch(request, table_name):
 
         return track_error_and_rsp('E404-2', 'Table not found')
 
+    except DatatypeUndefinedError:
+
+        return track_error_and_rsp('E900-1', 'API error')
+
     rsp = {
             'success': True,
-            # TODO
-
+            factory.table.name: obj_list,
         }
 
     return JsonResponse(rsp)

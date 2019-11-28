@@ -11,6 +11,12 @@ def create_error_types(apps, schema_editor):
             description=None,
         )
 
+    ErrorType.objects.create(
+            code='E900-1',
+            summary='RecordModelFactory.value_to_jsonable - Undefined datatype',
+            description=None,
+        )
+
 
 class Migration(migrations.Migration):
 

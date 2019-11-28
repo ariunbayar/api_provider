@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import datetime
 
 from django.db import transaction, DatabaseError
@@ -8,6 +9,7 @@ from table.models import Table
 from column.models import Column
 from value.models import Value
 from main.utils import NonDeletedManager
+from error.utils import track_error
 
 
 class Record(models.Model):
@@ -60,6 +62,9 @@ class DateTimeValueError(ColumnValueError):
     pass
 
 class RecordSaveError(Exception):
+    pass
+
+class DatatypeUndefinedError(Exception):
     pass
 
 
@@ -135,7 +140,7 @@ class RecordModelFactory():
             raise TableNotFoundError
 
         self.table = table
-        self.columns = Column.obs.filter(table=table)
+        self.columns = Column.obs.filter(table=table).order_by('pk')
 
     def clean(self, values):
 
@@ -223,7 +228,47 @@ class RecordModelFactory():
 
         return obj
 
+    def value_to_jsonable(self, datatype, **datatype_values):
+
+            if datatype == 'bool':
+                return datatype_values['value_bool']
+
+            if datatype == 'int':
+                return datatype_values['value_int']
+
+            if datatype == 'char_250':
+                return datatype_values['value_char_250']
+
+            if datatype == 'text':
+                return datatype_values['value_text']
+
+            if datatype == 'datetime':
+                return datatype_values['value_datetime'].strftime(settings.DATETIME_API_FORMAT)
+
+            raise DatatypeUndefinedError
+
     def fetch(self):
 
-        # TODO
-        return obj
+        fields_ref = ['record_id', 'column_id']
+        fields_value = ['value_bool', 'value_int', 'value_char_250', 'value_text', 'value_datetime']
+
+        qs = Value.objects.filter(record__table=self.table).order_by('record', 'column')
+        values = qs.values_list(*fields_ref, *fields_value)
+
+        column_pk_to_column = dict((col.pk, col) for col in self.columns)
+
+        # TODO use generators for performance
+        obj_ref = defaultdict(dict)
+
+        for record_id, column_id, *value_list in values:
+
+            column = column_pk_to_column[column_id]
+            value = self.value_to_jsonable(column.datatype, **dict(zip(fields_value, value_list)))
+
+            obj_ref[record_id][column.name] = value
+
+        obj_list = []
+        for pk, obj in obj_ref.items():
+            obj_list.append({'pk': pk, **obj})
+
+        return obj_list
