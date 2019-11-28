@@ -22,13 +22,13 @@ from error.utils import track_error
 # TODO api_authentication
 @require_POST
 @csrf_exempt
-def insert(request, table_name):
+def insert(request, table_slug):
 
     def track_error_and_rsp(error_code, message):
         track_error(request.tracking_number, error_code)
         return JsonResponse({'success': False, 'error': message})
 
-    factory = RecordModelFactory(table_name)
+    factory = RecordModelFactory(table_slug)
 
     try:
 
@@ -81,14 +81,14 @@ def insert(request, table_name):
 
 
 @require_GET
-def fetch(request, table_name):
+def fetch(request, table_slug):
 
     def track_error_and_rsp(error_code, message):
         track_error(request.tracking_number, error_code)
         return JsonResponse({'success': False, 'error': message})
 
 
-    factory = RecordModelFactory(table_name)
+    factory = RecordModelFactory(table_slug)
 
     try:
 

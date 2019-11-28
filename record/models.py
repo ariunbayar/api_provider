@@ -132,10 +132,10 @@ class RecordModel():
 
 class RecordModelFactory():
 
-    def __init__(self, table_name):
+    def __init__(self, table_slug):
 
         try:
-            table = Table.obs.get(name=table_name)
+            table = Table.obs.get(slug=table_slug)
         except Table.DoesNotExist:
             raise TableNotFoundError
 

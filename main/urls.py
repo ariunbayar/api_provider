@@ -46,8 +46,8 @@ urlpatterns = [
 
     path('request/', request.views.list, name='request-list'),
 
-    path('api/<str:table_name>/new/', record.views.insert, name='api-record-insert'),
-    path('api/<str:table_name>/', record.views.fetch, name='api-record-fetch'),
+    path('api/<str:table_slug>/new/', record.views.insert, name='api-record-insert'),
+    path('api/<str:table_slug>/', record.views.fetch, name='api-record-fetch'),
 
 ]
 
