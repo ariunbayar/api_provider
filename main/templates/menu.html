@@ -1,17 +1,22 @@
 {% with request.resolver_match.url_name as route %}
 <ul class="menu">
 
-    <li><a href="#" class="logo">API &amp; Lounge</a></li>
-
-    <li><a href="{% url "table-list" %}" {% if route == "table-list" or route == "table-new" or route == "table-detail" or route == "table-edit" %}class="active"{% endif %}>Tables</a></li>
-
-    <li><a href="{% url "request-list" %}" {% if route == "request-list" %}class="active"{% endif %}>Requests</a></li>
-    <li><a href="{% url "css-guide" %}" {% if route == "css-guide" %}class="active"{% endif %}>CSS Guide</a></li>
+    <li><a href="{% url "page-home" %}" class="logo">API &amp; Lounge</a></li>
 
     {% if request.user.is_authenticated %}
-    <li><a href="{% url "logout" %}" {% if route == "logout" %}class="active"{% endif %}>Гарах</a></li>
+
+        <li><a href="{% url "table-list" %}" {% if route == "table-list" or route == "table-new" or route == "table-detail" or route == "table-edit" %}class="active"{% endif %}>Tables</a></li>
+
+        <li><a href="{% url "request-list" %}" {% if route == "request-list" %}class="active"{% endif %}>Requests</a></li>
+        <li><a href="{% url "css-guide" %}" {% if route == "css-guide" %}class="active"{% endif %}>CSS Guide</a></li>
+
+        <li><a href="{% url "logout" %}" {% if route == "logout" %}class="active"{% endif %}>Гарах</a></li>
     {% else %}
-    <li><a href="{% url "login" %}" {% if route == "login" %}class="active"{% endif %}>Нэвтрэх</a></li>
+
+        <li><a href="{% url "table-list" %}" {% if route == "table-list" or route == "table-new" or route == "table-detail" or route == "table-edit" %}class="active"{% endif %}>Tables</a></li>
+
+        <li><a href="{% url "login" %}" {% if route == "login" %}class="active"{% endif %}>Нэвтрэх</a></li>
+
     {% endif %}
 
 </ul>

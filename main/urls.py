@@ -31,6 +31,7 @@ urlpatterns = [
     path('logout/', secure.views.logout, name='logout'),
 
     path('p/css-guide/', pages.views.css_guide, name='css-guide'),
+    path('', pages.views.homepage, name='page-home'),
 
     path('table/', table.views.list, name='table-list'),
     path('table/new/', table.views.new, name='table-new'),
